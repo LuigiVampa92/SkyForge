@@ -1,0 +1,53 @@
+def projectToBuildRemotely = "$ROOT_PROJECT_NAME"
+
+initscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.luigivampa92:mirakle:1.6.1-02'
+    }
+}
+
+def paramsWithoutAndroidStudioVersion = new HashMap<>(gradle.startParameter.projectProperties)
+paramsWithoutAndroidStudioVersion.remove("android.injected.studio.version")
+gradle.startParameter.projectProperties = paramsWithoutAndroidStudioVersion
+
+apply plugin: Mirakle
+
+rootProject {
+    if (projectToBuildRemotely.equals(name)) {
+        project.logger.lifecycle('Remote builds mode activated for this project. Going to start remote build')
+        mirakle {
+            host '$SERVER_SSH_ALIAS'
+            remoteFolder ".mirakle"
+            excludeCommon += ["*.DS_Store"]
+            excludeCommon += ["*.hprof"]
+            excludeCommon += [".idea"]
+            excludeCommon += [".gradle"]
+            excludeCommon += ["**/.git/"]
+            excludeCommon += ["**/.gitignore"]
+            excludeCommon += ["**/local.properties"]
+            excludeCommon += ["**/backup_*.gradle"]
+            excludeLocal += ["**/build/"]
+            excludeLocal += ["*.apk"]
+            excludeRemote += ["**/src/"]
+            excludeRemote += ["**/build/.transforms/**"]
+            excludeRemote += ["**/build/kotlin/**"]
+            excludeRemote += ["**/build/tmp/**"]
+            excludeRemote += ["**/build/intermediates/**"]
+            includeRemote += ["**/build/intermediates/apk/***"]
+            includeRemote += ["**/build/intermediates/apk_ide_redirect_file/***"]
+            rsyncToRemoteArgs += ["-avAXEWSlHh"]
+            rsyncToRemoteArgs += ["--info=progress2"]
+            rsyncToRemoteArgs += ["--compress-level=9"]
+            rsyncFromRemoteArgs += ["-avAXEWSlHh"]
+            rsyncFromRemoteArgs += ["--info=progress2"]
+            rsyncFromRemoteArgs += ["--compress-level=9"]
+            fallback false
+            downloadInParallel false
+            downloadInterval 3000
+            breakOnTasks = ["assemble", "install", "package"]
+        }
+    }
+}

@@ -1,0 +1,47 @@
+<idea-plugin>
+    <id>com.luigivampa92.remoteandroidbuilds.ideplugin</id>
+    <name>SkyForge</name>
+    <vendor email="luigivampa92@gmail.com" url="https://github.com/LuigiVampa92/SkyForge">Pavel Vasilev</vendor>
+
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.androidstudio</depends>
+    <depends>org.jetbrains.android</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <notificationGroup id="Remote Android Builds" displayType="BALLOON"/>
+        <applicationService serviceImplementation="com.luigivampa92.remoteandroidbuilds.ideplugin.services.RemoteBuildsConfigurationPersistentStateService" />
+        <applicationService
+                serviceInterface="com.luigivampa92.remoteandroidbuilds.ideplugin.services.RemoteBuildConfigurationService"
+                serviceImplementation="com.luigivampa92.remoteandroidbuilds.ideplugin.services.RemoteBuildConfigurationServicePersistentStateImpl" />
+        <applicationConfigurable parentId="build" instance="com.luigivampa92.remoteandroidbuilds.ideplugin.settings.RemoteBuildsConfigurationSettings" />
+    </extensions>
+
+    <actions>
+        <group id="RemoteAndroidBuildsPlugin.Toolbar"
+               text="Remote Builds"
+               description="Remote builds toolbar">
+            <separator />
+            <action
+                    id="ToggleRemoteBuildsAction"
+                    class="com.luigivampa92.remoteandroidbuilds.ideplugin.actions.ToggleRemoteBuildsAction"
+                    text="Toggle Remote Builds"
+                    icon="AllIcons.Webreferences.Server"
+                    description="Control remote builds mode" />
+            <action
+                    id="OpenPluginSettingsAction"
+                    class="com.luigivampa92.remoteandroidbuilds.ideplugin.actions.OpenPluginSettingsAction"
+                    text="Remote Build Configurations"
+                    icon="AllIcons.General.GearHover"
+                    description="Edit remote builds configurations" />
+            <action
+                    id="PrepareServerAction"
+                    class="com.luigivampa92.remoteandroidbuilds.ideplugin.actions.PrepareServerAction"
+                    text="Prepare Server For Builds"
+                    icon="AllIcons.Debugger.Console"
+                    description="Prepare server to run android builds" />
+            <add-to-group
+                    group-id="ToolbarRunGroup"
+                    anchor="last" />
+        </group>
+    </actions>
+</idea-plugin>

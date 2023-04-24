@@ -1,0 +1,49 @@
+plugins {
+    id 'java'
+    id 'org.jetbrains.intellij' version '1.13.3'
+}
+
+group 'com.luigivampa92.remoteandroidbuilds'
+version '0.4.0'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    maven {
+        url 'https://www.jetbrains.com/intellij-repository/releases'
+    }
+}
+
+tasks {
+    buildSearchableOptions {
+        enabled = false
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+intellij {
+    pluginName = 'SkyForge'
+    type = 'AI'
+    version = 'AI-213.7172.25.2113.9014738'
+    plugins = ['android']
+}
+
+patchPluginXml {
+    version = rootProject.version
+    sinceBuild = "213"
+    untilBuild = "223.*"
+    pluginDescription = file("extra/pluginDescription.html").text
+    changeNotes = file("extra/pluginChangeNotes.html").text
+}
+
+signPlugin {
+    certificateChainFile = file("signing/chain.crt")
+    privateKeyFile = file("signing/private.pem")
+    def passwordFile = file("signing/private_key_password")
+    password = passwordFile.exists() ? passwordFile.text : ""
+}

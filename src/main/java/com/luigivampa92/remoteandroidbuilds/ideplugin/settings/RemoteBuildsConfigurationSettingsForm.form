@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="com.luigivampa92.remoteandroidbuilds.ideplugin.settings.RemoteBuildsConfigurationSettingsForm">
+  <grid id="27dc6" binding="remoteBuildsConfigPanel" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="0" left="0" bottom="0" right="0"/>
+    <constraints>
+      <xy x="20" y="20" width="700" height="700"/>
+    </constraints>
+    <properties>
+      <maximumSize width="1000" height="1000"/>
+      <minimumSize width="700" height="700"/>
+      <name value="remoteBuildsConfigPanel"/>
+      <opaque value="true"/>
+      <preferredSize width="700" height="700"/>
+    </properties>
+    <border type="none"/>
+    <children>
+      <grid id="69e49" binding="sshSettingsPanel" layout-manager="GridLayoutManager" row-count="4" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="8" bottom="0" right="8"/>
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="3" anchor="1" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <name value="sshSettingsPanel"/>
+        </properties>
+        <border type="empty" title="SSH settings:" title-justification="1">
+          <size top="0" left="0" bottom="0" right="0"/>
+        </border>
+        <children>
+          <grid id="3ee68" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="61c70" class="javax.swing.JLabel" binding="sshAliasLabel">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                    <minimum-size width="70" height="-1"/>
+                    <preferred-size width="70" height="-1"/>
+                    <maximum-size width="70" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <enabled value="true"/>
+                  <name value="sshAliasLabel"/>
+                  <text value="alias:"/>
+                </properties>
+              </component>
+              <component id="48c73" class="javax.swing.JTextField" binding="sshAliasTextField">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <name value="sshAliasTextField"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <grid id="c05cc" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="76aca" class="javax.swing.JLabel" binding="sshUserNameLabel">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                    <minimum-size width="70" height="-1"/>
+                    <preferred-size width="70" height="-1"/>
+                    <maximum-size width="70" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <name value="sshUserNameLabel"/>
+                  <text value="username:"/>
+                </properties>
+              </component>
+              <component id="a4d58" class="javax.swing.JTextField" binding="sshUserNameTextField">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <name value="sshUserNameTextField"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <grid id="60973" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="b844a" class="javax.swing.JLabel" binding="sshUserPasswordLabel">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                    <minimum-size width="70" height="-1"/>
+                    <preferred-size width="70" height="-1"/>
+                    <maximum-size width="70" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <name value="sshUserPasswordLabel"/>
+                  <text value="password:"/>
+                </properties>
+              </component>
+              <component id="a704" class="javax.swing.JPasswordField" binding="sshUserPasswordTextField">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <name value="sshUserPasswordTextField"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <vspacer id="e40b3">
+            <constraints>
+              <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false">
+                <minimum-size width="-1" height="16"/>
+                <preferred-size width="-1" height="16"/>
+                <maximum-size width="-1" height="16"/>
+              </grid>
+            </constraints>
+          </vspacer>
+        </children>
+      </grid>
+      <grid id="61b10" binding="proxySettingsPanel" layout-manager="GridLayoutManager" row-count="4" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="8" bottom="0" right="8"/>
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="3" anchor="1" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <name value="proxySettingsPanel"/>
+        </properties>
+        <border type="empty" title="Proxy settings:"/>
+        <children>
+          <component id="b93f4" class="javax.swing.JCheckBox" binding="proxyRequiredCheckBox">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <name value="proxyRequiredCheckBox"/>
+              <text value="proxy required"/>
+            </properties>
+          </component>
+          <grid id="b2ece" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="d437e" class="javax.swing.JLabel" binding="proxyPortLabel">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                    <minimum-size width="70" height="-1"/>
+                    <preferred-size width="70" height="-1"/>
+                    <maximum-size width="70" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <name value="proxyPortLabel"/>
+                  <text value="port:"/>
+                </properties>
+              </component>
+              <component id="86c3d" class="javax.swing.JTextField" binding="proxyPortTextField">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <name value="proxyPortTextField"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <component id="9b9d5" class="javax.swing.JLabel" binding="proxySettingsDescriptionLabel">
+            <constraints>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                <minimum-size width="600" height="-1"/>
+                <preferred-size width="600" height="-1"/>
+                <maximum-size width="600" height="-1"/>
+              </grid>
+            </constraints>
+            <properties>
+              <name value="proxySettingsDescriptionLabel"/>
+              <text value="&lt;html&gt;&lt;b&gt;Note:&lt;/b&gt; Using a proxy requires Nginx or other reverse-proxy server being set and properly configured on your local computer. This is currently not maintained by IDE, so you will have to configure it yourself. Check out plugin's GitHub page for more information&lt;/html&gt;"/>
+            </properties>
+          </component>
+          <vspacer id="74dea">
+            <constraints>
+              <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false">
+                <minimum-size width="-1" height="16"/>
+                <preferred-size width="-1" height="16"/>
+                <maximum-size width="-1" height="16"/>
+              </grid>
+            </constraints>
+          </vspacer>
+        </children>
+      </grid>
+      <grid id="228d" binding="sdkSettingsPanel" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="8" bottom="0" right="8"/>
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="1" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <name value="sdkSettingsPanel"/>
+        </properties>
+        <border type="empty" title="SDK dependencies settings:"/>
+        <children>
+          <grid id="7c5ab" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="63a0" class="javax.swing.JLabel" binding="sdkDependenciesLabel">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                    <minimum-size width="70" height="-1"/>
+                    <preferred-size width="70" height="-1"/>
+                    <maximum-size width="70" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <name value="sdkDependenciesLabel"/>
+                  <text value="values:"/>
+                </properties>
+              </component>
+              <component id="54350" class="javax.swing.JTextField" binding="sdkDependenciesTextField">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <name value="sdkDependenciesTextField"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <component id="35edc" class="javax.swing.JLabel" binding="sdkDependenciesDescriptionLabel">
+            <constraints>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                <minimum-size width="600" height="-1"/>
+                <preferred-size width="600" height="-1"/>
+                <maximum-size width="600" height="-1"/>
+              </grid>
+            </constraints>
+            <properties>
+              <name value="sdkDependenciesDescriptionLabel"/>
+              <text value="&lt;html&gt;&lt;b&gt;Note:&lt;/b&gt; You probably do not need this. Normal Java/Kotlin android project should be built without any extra dependencies. Fill this field if your project uses something like NDK etc. Leave this blank if you are not certain. Check out plugin's GitHub page for more information&lt;/html&gt;"/>
+            </properties>
+          </component>
+          <component id="2e120" class="javax.swing.JCheckBox" binding="extraDependenciesRequiredCheckBox">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <name value="extraDependenciesRequiredCheckBox"/>
+              <text value="extra android sdk dependencies required"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+    </children>
+  </grid>
+</form>

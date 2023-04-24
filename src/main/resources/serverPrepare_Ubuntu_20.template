@@ -1,0 +1,157 @@
+#!/bin/bash
+
+declare -a ANDROID_SDK_DEPENDENCIES=("PLACEHOLDER_FOR_ANDROID_SDK_DEPENDENCIES")
+DEP_JDK="PLACEHOLDER_FOR_DEPENDENCY_JDK"
+DIR_USER="PLACEHOLDER_FOR_USER_DIR"
+SUDO_PASSWORD="PLACEHOLDER_FOR_USER_PASSWORD"
+EXIT_CODE_INVALID_PASSWORD=101
+LOG_ECHO_PREFIX_LINE="RBSLOG_LINE"
+LOG_ECHO_PREFIX_ERROR="RBSLOG_ERROR"
+LOG_ECHO_PREFIX_SIGNAL="RBSLOG_SIGNAL"
+
+DIR_ANDROID_SDK="Android/Sdk"
+FILE_ENV_VARS=".android_set_env"
+FILE_ENV_APPEND=".bashrc"
+
+function echoLog() {
+  echo "$LOG_ECHO_PREFIX_LINE $1"
+}
+
+function echoError() {
+  echo "$LOG_ECHO_PREFIX_ERROR $1"
+}
+
+function echoSignal() {
+  echo "$LOG_ECHO_PREFIX_SIGNAL $1"
+}
+
+function ensureSdkInstalled() {
+  cd $DIR_USER
+  [ ! -d "$DIR_USER/$DIR_ANDROID_SDK" ] && mkdir -p "$DIR_USER/$DIR_ANDROID_SDK"
+  if [ ! -d "$DIR_USER/$DIR_ANDROID_SDK/cmdline-tools" ]; then
+    echoLog 'Commandline tools do not exist. Downloading.'
+    cd $DIR_USER/$DIR_ANDROID_SDK
+    cmdline_tools_url=`curl -sSL https://developer.android.com/studio/index.html#command-tools | grep commandlinetools-linux | egrep -o 'https?://[^ ]+' | sed 's/'\"'/'/g | head -1`
+    zip_file=`echo $cmdline_tools_url | awk -F/ '{print $NF}'`
+    wget $cmdline_tools_url
+    if [ $? -ne 0 ]; then
+      echoLog 'Error downloading commandline tools'
+      rm -rf cmdline-tools
+      exit 1
+    fi
+    echoLog 'Extracting commandline tools...'
+    unzip $zip_file 1>/dev/null
+    if [ $? -ne 0 ]; then
+      echoLog 'Error extracting commandline tools'
+      rm -rf cmdline-tools
+      exit 1
+    fi
+    rm commandlinetools-linux-*.zip*
+    mv cmdline-tools latest
+    mkdir cmdline-tools
+    mv latest cmdline-tools/latest
+    echoLog 'Done'
+  else
+    echoLog 'Commandline tools already exist. Skipping.'
+  fi
+  cd $DIR_USER
+}
+
+function ensureEnvVariablesExist() {
+cd $DIR_USER
+if [ ! -f $DIR_USER/$FILE_ENV_VARS ]; then
+echoLog 'Variables are not yet set. Setting up.'
+cat <<EOF >> $DIR_USER/$FILE_ENV_VARS
+#!/bin/bash
+
+JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"
+ANDROID_HOME="$DIR_USER/$DIR_ANDROID_SDK"
+ANDROID_SDK_ROOT="$DIR_USER/$DIR_ANDROID_SDK"
+
+export JAVA_HOME
+export ANDROID_HOME
+export ANDROID_SDK_ROOT
+
+EOF
+echo 'PATH="$JAVA_HOME/bin:$ANDROID_HOME:$ANDROID_HOME/cmdline-tools/latest/bin:$PATH"' >> $DIR_USER/$FILE_ENV_VARS
+else
+echoLog 'Variables are already set. Skipping.'
+fi
+chmod +x $DIR_USER/$FILE_ENV_VARS
+}
+
+function ensureEnvVariablesAppended() {
+  VALUE="if [ -f $FILE_ENV_VARS ]; then . ~/$FILE_ENV_VARS ; fi"
+  TARGET=$DIR_USER/$FILE_ENV_APPEND
+  if [ -f $TARGET ]; then
+    if cat $TARGET | grep "$FILE_ENV_VARS" 1>/dev/null ; then
+      echoLog 'Profile is already appended with variables. Skipping.'
+    else
+      echoLog 'Profile is not yet appended with variables. Setting up.'
+      echo " " >> $TARGET
+      echo " " >> $TARGET
+      echo "# settings varaibles for android builds with mirakle:" >> $TARGET
+      echo " " >> $TARGET
+      echo $VALUE >> $TARGET
+    fi
+    cd ~
+    . ./$FILE_ENV_VARS
+  else
+    echoLog 'Error. No proper profile file found.'
+    exit 1
+  fi
+}
+
+function ensureDependencyInstalled() {
+  echoLog "Ensure $1 installed"
+  sudo apt install $1 -y
+  if [ $? -ne 0 ]; then
+    echoLog "Error installing $1"
+    exit 1
+  fi
+}
+
+function ensureDependenciesInstalled() {
+    ensureDependencyInstalled $DEP_JDK
+    ensureDependencyInstalled unzip
+    ensureDependencyInstalled htop
+    ensureDependencyInstalled acl
+}
+
+function ensureAndroidPlatformSetUp() {
+  echoLog "Download android sdk dependencies"
+  yes | sdkmanager --sdk_root=${ANDROID_HOME} --licenses 1>/dev/null
+  for i in "${ANDROID_SDK_DEPENDENCIES[@]}"
+    do
+      if sdkmanager --list_installed | grep "$i" 1>/dev/null ; then
+        echoLog "$i is installed"
+      else
+        echoLog "$i will be installed"
+        yes | sdkmanager "$i"
+      fi
+  done
+}
+
+function ensureTzSetUp() {
+    ensureDependencyInstalled ntp > /dev/null 2>&1
+    sudo systemctl enable ntp
+}
+
+echoLog "Settings up a machine for remote android builds"
+echo "Please provide sudo password"
+echo $SUDO_PASSWORD | timeout -s SIGKILL 4 sudo -v -S && echoSignal "SUDO_PASSWORD_OK" || exit $EXIT_CODE_INVALID_PASSWORD
+sudo echo "OK"
+echoLog "Updating packages"
+sudo apt update
+echoLog "Ensure ntp installed"
+ensureTzSetUp
+echoLog "Updating system dependencies"
+ensureDependenciesInstalled
+echoLog "Updating android sdk"
+ensureSdkInstalled
+echoLog "Settings environment variables"
+ensureEnvVariablesExist
+ensureEnvVariablesAppended
+echoLog "Settings up android dependencies"
+ensureAndroidPlatformSetUp
+echoLog "Done. Ready to run remote android builds"
