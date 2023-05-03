@@ -1,5 +1,5 @@
 <div align="center">
-    <a href="#">
+    <a href="https://plugins.jetbrains.com/plugin/21586-skyforge">
         <img src="./src/main/resources/META-INF/pluginIcon.svg" width="160" height="160" alt="logo"/>
     </a>
 </div>
@@ -14,6 +14,7 @@
 - [Usage](#usage)
 - [Demo](#demo)
 - [IDE compatibility](#ide-compatability)
+- [Install](#install)
 - [Support](#support)
 - [Feedback](#feedback)
 - [Acknowledgements](#acknowledgements)
@@ -56,9 +57,36 @@ It utilizes the power of ssh and rsync tools. The source code of your Android pr
 
 This plugin is meant to be used in Android Studio. Technically, it will also work in Intellij Idea, but only if your project is an Android project and Gradle is used as a build system.
 
+## Install
+
+### Install from Settings
+
+In your Android Studio, enter the IDE Settings. Navigate to <kbd>Plugins</kbd>, select the <kbd>Marketplace</kbd> tab, and search
+for <kbd>SkyForge</kbd> plugin, click the <kbd>Install Plugin</kbd> button.
+
+Alternatively, you can download the plugin <a href="https://plugins.jetbrains.com/plugin/21586-skyforge">directly from the JetBrains Marketplace page</a>
+
+### Install from release zip
+
+1. Download the zip file from the [releases page](https://github.com/LuigiVampa92/SkyForge/releases)
+2. Import it into Android Studio: <kbd>Settings</kbd> > <kbd>Plugins</kbd> > Click on "Gear" icon > <kbd>Install Plugin from Disk</kbd>
+
+### Build and install from source code
+
+1. Download the source code by cloning it with git
+2. Enter the project directory
+3. Execute the Gradle command to build the plugin
+```
+git clone https://github.com/LuigiVampa92/SkyForge.git
+cd SkyForge
+./gradlew buildPlugin
+```
+After the build process is completed, you can obtain the result zip file in <kbd>./build/distributions</kbd> directory.
+
 ## Support
 
-* Star the repository ⭐
+* Star this GitHub repository ⭐
+* [Rate the plugin on JetBrains Marketplace](https://plugins.jetbrains.com/plugin/21586-skyforge) 👍
 * [Buy me a coffee](https://www.buymeacoffee.com/luigivampa92) 💲
 
 ## Feedback
