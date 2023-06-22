@@ -28,7 +28,7 @@ Now prepare your ed25519 ssh public key value (copy it to the clipboard, for exa
 
 Let's create a <kbd>.ssh</kbd> folder, give this folder the right permissions, and save the public key to be able to connect and authenticate as this user (**replace** <kbd>___YOUR_PUBLIC_KEY_VALUE___</kbd> **with an actual value**):
 ```
-mkdir -p /home/$SSH_SET_USER_NAME/.ssh
+mkdir -p /home/builder/.ssh
 echo ___YOUR_PUBLIC_KEY_VALUE___ >> /home/builder/.ssh/authorized_keys
 chown -R builder:builder /home/builder/.ssh
 chmod 700 /home/builder/.ssh
